@@ -1,0 +1,70 @@
+/*Fonts*/
+@font-face {
+    font-family: "Comfortaa Light";
+    src: url('../fonts/Comfortaa-Light.ttf');
+}
+@font-face {
+    font-family: "Comfortaa Regular";
+    src: url('../fonts/Comfortaa-Regular.ttf');
+}
+@font-face {
+    font-family: "Comfortaa Bold";
+    src: url('../fonts/Comfortaa-Bold.ttf');
+}
+
+body{
+    background-color: #30365c;
+}
+#inputContain{
+    width: 500px;
+    padding: 20px;
+    margin: 150px auto;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+}
+#pWelcome{
+    font-size: 30px;
+    font-family: "Comfortaa Bold";
+    font-style: italic;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+#pIndication{
+    text-align: center;
+    margin-top: 15px;
+    font-family: "Comfortaa Regular";
+}
+form{
+    padding-left: 10px;
+    padding-right: 25px;
+    margin-top: 1em;
+    /*border: 1px solid blue;*/
+}
+label{
+    display: inline-block;
+    width: 150px;
+    margin-top: 20px;
+    font-family: "Comfortaa Regular";
+}
+input{
+    padding: 5px;
+    font-size: 1em;
+    width: 100%;
+    margin-top: 5px;
+    margin-right: 30px;
+    font-family: "Comfortaa Regular";
+    border: 2px solid #30365c;
+    border-radius: 3px;
+}
+button{
+    margin-top: 15px;
+    padding: 5px;
+    background-color: #30365c;
+    color: #FFF;
+    font-family: "Comfortaa Regular";
+    font-size: 15px;
+    border: 2px solid #30365c;
+    border-radius: 5px;
+}

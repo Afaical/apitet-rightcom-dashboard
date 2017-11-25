@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des données</title>
+    <link rel="stylesheet" type="text/css" href="../css/dataList.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+</head>
+<body ng-app="MonApp">
+<div ng-controller="GetDeleteUserCtrl">
+    <div id="principalContain">
+        <div id="header">
+            <p id="textUserList">Liste des utilisateurs</p>
+            <div id="divSearch">
+                <input ng-model="query" id="iSearch" class="searchOption" type="text" placeholder="Entrer le mot de recherche">
+                <select ng-model="order" id="selector" class="searchOption">
+                    <option value="userFirstname">Filtrer par nom</option>
+                    <option value="userSurname">Filtrer par prénom</option>
+                    <option value="userFunction">Filtrer par fonction</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <div ng-repeat="user in users | filter:query | orderBy:order" id="userList">
+                <a class="userInfo" href="../images/author.jpeg">
+                    <img src="../images/author.jpeg">
+                </a>
+                <div id="userInfoDetail" class="userInfo">
+                    <p id="pUserName">{{user.userFirstname | uppercase}}   {{user.userSurname}}</p>
+                    <p id="pUserFunction">{{user.userFunction}}</p>
+                </div>
+                <div id="divButton" class="userInfo">
+                    <button ng-click="showUpdateInput(user.userId, user.userFirstname, user.userSurname, user.userFunction)" id="btnUpdate">Modifier</button>
+                    <button ng-click="delete(user.userId)" id="btnDelete">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-show="showUpdateComponent" id="updateUserComponent">
+        <div id="divUpdateUserInput">
+            <div>
+                Utilisateur numéro:
+                <p ng-model="userUpdateId" id="idUser">{{userUpdateId}}</p>
+            </div>
+            <div id="divUpdateInputFirstame" class="divInputUpdateUser">
+                <label>Nom:</label>
+                <input ng-model="userUpdateFirstname" type="text" name="Nom">
+            </div>
+            <div class="divInputUpdateUser">
+                <label>Prénoms:</label>
+                <input ng-model="userUpdateSurname" type="text" name="Prénoms">
+            </div>
+            <div class="divInputUpdateUser">
+                <label>Fonction:</label>
+                <input ng-model="userUpdateFunction" type="text" name="Poste">
+            </div>
+            <div>
+                <button ng-click="cancelUpdateUser()" id="btnAnnulerUpdate">Annuler</button>
+                <button ng-click="updateUser(userUpdateId, userUpdateFirstname, userUpdateSurname, userUpdateFunction)" id="btnUpdateUser">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-controller="AddUserCtrl" id="addUserComponent">
+    <div ng-show="input" id="divAddUserInput">
+        <div id="divInputFirstame" class="divInputAddUser">
+            <label>Nom:</label>
+            <input ng-model="userFirstname" type="text" name="Nom">
+        </div>
+        <div class="divInputAddUser">
+            <label>Prénoms:</label>
+            <input ng-model="userSurname" type="text" name="Prénoms">
+        </div>
+        <div class="divInputAddUser">
+            <label>Fonction:</label>
+            <input ng-model="userFunction" type="text" name="Poste" placeholder="Ex: Menusier">
+        </div>
+        <div>
+            <button ng-click="cancelAddUser()" id="btnAnnuler">Annuler</button>
+            <button ng-click="addUser(userFirstname, userSurname, userFunction)" id="btnAddUser">Ajouter</button>
+        </div>
+    </div>
+    <img ng-show="btnShowAddInput" ng-click="showAddUserInput()" id="showAddUserInput" class="addUserComponent" src="../images/ima_add.png">
+</div>
+
+<script>
+    var app = angular.module('MonApp', []);
+
+    /*CONTROLLER TO GET ALL USER AND DELETE USER*/
+    app.controller('GetDeleteUserCtrl', function ($scope, $http) {
+        // var userId;
+        $scope.showUpdateComponent = false;
+         $http({method: 'GET',
+                url: 'https://apitest-rightcom.herokuapp.com/user/getAllUser',
+                withCredentials: true,
+                headers:{ 'Content-Type': 'application/x-www-form-urlencoded' }})
+                .then(
+                    function(success){
+                        if (success.data !== null) {
+                            $scope.users = success.data;
+                        }
+                    }, function(error) {
+                        alert('Désolé, une erreur s\'est produite, merci de réessayer');
+                    });
+
+        $scope.showUpdateInput = function(userId, userFirstname, userSurname, userFunction){
+            $scope.showUpdateComponent = true;
+
+            $scope.userUpdateId = userId
+            $scope.userUpdateFirstname = userFirstname;
+            $scope.userUpdateSurname = userSurname;
+            $scope.userUpdateFunction = userFunction;
+        }
+
+        $scope.cancelUpdateUser = function(){
+            $scope.showUpdateComponent = false;
+        }
+
+        $scope.updateUser = function(userId, userFirstname, userSurname, userFunction){
+            $http({method: 'PUT',
+                url: 'https://apitest-rightcom.herokuapp.com/user/updateUser/',
+                params: {userId: userId, userFirstname: userFirstname, userSurname: userSurname, userFunction: userFunction},
+                withCredentials: true,
+                headers:{ 'Content-Type': 'application/x-www-form-urlencoded' }})
+                .then(
+                    function(success){
+                        if (success.data.success == true){
+                            window.location.reload(true); 
+                        } else{
+                            alert('La mise jour a échoué. Merci de réessayer');
+                        }
+                    },
+                    function(erreur){
+                        alert('Désolé, une erreur s\'est produite, merci de réessayer');
+                    });
+        }
+
+        $scope.delete = function(userId){
+            $http({method: 'DELETE',
+                url: 'https://apitest-rightcom.herokuapp.com/user/deleteUser/',
+                params: {userId: userId},
+                withCredentials: true,
+                headers:{ 'Content-Type': 'application/x-www-form-urlencoded' }})
+                .then(
+                    function(success){
+                        if (success.data.success == true){
+                            window.location.reload(true); 
+                        } else{
+                            alert('La suppression a échoué. Merci de réessayer');
+                        }
+                    },
+                    function(erreur){
+                        alert('Désolé, une erreur s\'est produite, merci de réessayer');
+                    });
+        }
+    });  
+
+    /*CONTROLLER TO ADD USER*/
+    app.controller('AddUserCtrl', function ($scope, $http){
+        $scope.input = false;
+        $scope.btnShowAddInput = true;
+        $scope.showAddUserInput = function() {
+            $scope.input = true;
+            $scope.btnShowAddInput = false;
+        }
+        $scope.cancelAddUser = function() {
+            $scope.input = false;
+            $scope.btnShowAddInput = true;
+        }
+        $scope.addUser = function(userFirstname, userSurname, userFunction){
+            $http({method: 'POST',
+                url: 'https://apitest-rightcom.herokuapp.com/user/addUser/',
+                params: {userFirstname: userFirstname, userSurname: userSurname, userFunction: userFunction},
+                withCredentials: true,
+                headers:{ 'Content-Type': 'application/x-www-form-urlencoded' }})
+                .then(
+                    function(success){
+                        if (success.data.success == true){
+                            window.location.reload(true); 
+                        } else{
+                            alert('L\'ajout a échoué. Merci de réessayer');
+                        }
+                    },
+                    function(erreur){
+                        alert('Désolé, une erreur s\'est produite, merci de réessayer');
+                    });
+        }
+    });
+</script>
+</body>
+</html>

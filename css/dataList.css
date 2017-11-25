@@ -1,0 +1,242 @@
+/*Fonts*/
+@font-face {
+    font-family: "Comfortaa Light";
+    src: url('../fonts/Comfortaa-Light.ttf');
+}
+@font-face {
+    font-family: "Comfortaa Regular";
+    src: url('../fonts/Comfortaa-Regular.ttf');
+}
+@font-face {
+    font-family: "Comfortaa Bold";
+    src: url('../fonts/Comfortaa-Bold.ttf');
+}
+
+body{
+    background-color: #30365c;
+}
+#principalContain{
+    width: 500px;
+    height: 100px;
+    margin: 30px auto;
+}
+#header{
+    width: 100%;
+    height: 100px;
+    padding-top: 20px;
+    margin-bottom: 0px;
+    background-color: white;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
+}
+#textUserList{
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 0px;
+    font-size: 25px;
+    font-family: "Comfortaa Bold";
+}
+#divSearch{
+    margin: 10px 10px 5px 10px;
+    position: relative;
+}
+.searchOption{
+    padding: 3px;
+    font-size: 15px;
+    font-family: "Comfortaa Regular";
+    display: inline-block;
+    vertical-align: middle;
+
+}
+#iSearch{
+    width: 60%;
+    border: 2px solid #30365c;
+    border-radius: 2px;
+}
+#selector{
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
+#userList{
+    margin-top: 1px;
+    background-color: white;
+    border-radius: 3px;
+    position: relative;
+}
+img{
+    /*overflow: hidden;*/
+    margin: 10px 0 5px 20px;
+    border-radius: 50px;
+    width: 60px;
+    height: 60px;
+}
+.userInfo{
+    display: inline-block;
+    vertical-align: top;
+}
+#userInfoDetail{
+    margin-left: 15px;
+    /*border: 1px solid blue;*/
+}
+#userInfoDetail p{
+    display: block;
+    /*vertical-align: bottom;*/
+}
+#pUserName{
+    margin-top: 15px;
+    margin-bottom: 0px;
+    font-family: "Comfortaa Regular";
+    /*border:  1px solid crimson;*/
+}
+#pUserFunction{
+    margin-top: 5px;
+    margin-left: 100px;
+    font-family: "Comfortaa Regular";
+    font-size: 11px;
+    /*border: 1px solid yellowgreen;*/
+}
+#divButton{
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    margin: 10px 5px 3px 0px;
+}
+#divButton button{
+    color: #fff;
+    font-family: "Comfortaa Regular";
+    padding: 5px;
+}
+#btnUpdate{
+    background-color: #30365c;
+}
+#btnDelete{
+    background-color: #DC143C
+}
+#addUserComponent{
+    width: 300px;
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+#divAddUserInput{
+    /*border: 1px solid blue;*/
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+}
+#showAddUserInput{
+    /*border: 1px solid red;*/
+    width: 50px;
+    height: 50px;
+    margin-top: 0px;
+    margin-left: 10px;
+}
+.divInputAddUser{
+    margin-top: 5px;
+    margin-right: 5px;
+    background-color: white;
+}
+.divInputAddUser label{
+    font-size: 16px;
+    font-family: "Comfortaa Regular";
+}
+.divInputAddUser label, input{
+    display: block;
+    width: 100%;
+}
+.divInputAddUser input{
+    font-family: "Comfortaa Regular";
+    border: 2px solid #30365c;
+    border-radius: 3px;
+    font-size: 16px;
+}
+#divInputFirstame{
+    margin-top: 0px;
+}
+#btnAddUser, #btnAnnuler{
+    margin-top: 10px;
+    background-color: #30365c;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: "Comfortaa Regular";
+    color: white;
+    padding: 5px;
+}
+
+#updateUserComponent{
+    width: 300px;
+    margin-top: 20px;
+    margin-right: 80px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+#divUpdateUserInput{
+    /*border: 1px solid blue;*/
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+    font-family: "Comfortaa Regular";
+}
+.divInputUpdateUser{
+    margin-top: 5px;
+    margin-right: 5px;
+    background-color: white;
+}
+.divInputUpdateUser label{
+    font-size: 16px;
+    font-family: "Comfortaa Regular";
+}
+.divInputUpdateUser label, input{
+    display: block;
+    width: 100%;
+}
+.divInputUpdateUser input{
+    font-family: "Comfortaa Regular";
+    /*border: 2px solid #30365c;*/
+    border-radius: 3px;
+    font-size: 15px;
+}
+#divUpdateInputFirstame{
+    margin-top: 0px;
+}
+#btnUpdateUser, #btnAnnulerUpdate{
+    margin-top: 10px;
+    background-color: #30365c;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: "Comfortaa Regular";
+    color: white;
+    padding: 5px;
+}
+#idUser{
+    padding-top: 5px;
+    font-family: "Comfortaa Regular";
+}
+/*#footer{
+    width: 250px;
+    border-radius: 5px;
+}
+#footer img{
+    width: 50px;
+    height: 50px;
+}
+#addUserInfo{
+    background-color: white;
+    padding: 10px;
+}
+.addUserComponent{
+    display: block;
+}
+.addUserComponent label{
+    display: inline-block;
+    margin-top: 15px;
+    font-family: "Comfortaa Regular";
+    text-align: left;
+}*/

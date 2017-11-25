@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Accueil</title>
+    <link rel="stylesheet" type="text/css" href="../css/authentification.css" media="screen">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+</head>
+<body ng-app="MonApp">
+    <div id="inputContain">
+        <p id="pWelcome">Bienvenue</p>
+        <p id="pIndication">Merci de renseigner vos information pour vous connecter</p>
+        <form ng-controller="ConnexionCtrl">
+            <div>
+                <label>Addresse Mail:</label>
+                <input ng-model="email" id="iMail" type="email" placeholder="Ex: salamiabdel@gmail.com"/>
+            </div>
+            <div>
+                <label>Mot de pass:</label>
+                <input ng-model="password" id="iPassword" type="password"/>
+            </div>
+            <div>
+                <button ng-click="makeConnexion(email, password)" type="connexion">Connexion</button>
+            </div>
+        </form>
+    </div>
+    
+    <script type="text/javascript">
+        var app = angular.module('MonApp', []);
+        app.controller("ConnexionCtrl", function ($scope, $http){
+            $scope.makeConnexion = function (email, password) {
+                $http({method: 'GET',
+                    url: 'https://apitest-rightcom.herokuapp.com/admin/makeConnexion',
+                    params: {adminMail: email, adminPassword: password},
+                    withCredentials: true,
+                    headers:{ 'Content-Type': 'application/x-www-form-urlencoded' }})
+                    .then(
+                        function(success){
+                            if (success.data.success === true) {
+                                window.location = "../html/dataList.html";
+                            } else{
+                                alert("Désolé vous n'est pas un administrateur");
+                            }
+                        }, 
+                        function(error) {
+                            alert('Désolé, une erreur s\'est produite, merci de réessayer');
+                        });
+            };
+        });
+    </script>
+</body>
+</html>
